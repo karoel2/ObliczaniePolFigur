@@ -9,7 +9,36 @@ Wielokat *tab[11];
 Prostokat tabP[11];
 Kwadrat tabK[11];
 Trojkat tabT[11];
-int licznik=0;
+int licznik=0, suma;
+void case1() {
+	cout << "case1\n";
+	tabP[licznik].kon_pros();
+	tab[licznik] = &tabP[licznik];
+	cout << tab[licznik]->obwod() << endl;
+	licznik++;
+}
+void case2() {
+	cout << "case2\n";
+	tabK[licznik].kon_kwa();
+	tab[licznik] = &tabK[licznik];
+	cout << tab[licznik]->obwod() << endl;
+	licznik++;
+}
+void case3() {
+	cout << "case3\n";
+	tabT[licznik].kon_tro();
+	tab[licznik] = &tabT[licznik];
+	cout << tab[licznik]->obwod() << endl;
+	licznik++;
+}
+void case4(){
+	int i;
+	cout << "case4\n";
+	for (i = 0; i < licznik; i++) {
+		suma += tab[i]->obwod();
+	}
+	cout << "Suma obwodow jest rowna: " << suma << endl;
+}
 int main()
 {
 	do {
@@ -22,28 +51,18 @@ int main()
 		cin >> wybor;
 		switch (wybor) {
 		case '1':
-			cout << "case1" << endl;
-			tabP[licznik].kon_pros();
-			tab[licznik] = &tabP[licznik];
-			cout << tab[licznik]->obwod() << endl;
-			licznik++;
+			case1();
 			break;
 		case '2':
-			cout << "case2" << endl;
-			tabK[licznik].kon_kwa();
-			tab[licznik] = &tabK[licznik];
-			cout << tab[licznik]->obwod() << endl;
-			licznik++;
+			case2();
 			break;
 		case '3':
-			cout << "case3" << endl;
-			tabT[licznik].kon_tro();
-			tab[licznik] = &tabT[licznik];
-			cout << tab[licznik]->obwod() << endl;
-			licznik++;
+			case3();
+			break;
+		case '4':
+			case4();
 			break;
 		}
 	} while (wybor != '0');
     return 0;
 }
-

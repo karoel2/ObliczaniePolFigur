@@ -12,7 +12,7 @@ class Trojkat :public virtual Wielokat {
 	int a, b, c;
 public:
 	int obwod();
-	Trojkat::Trojkat(int=0, int=0, int=0);
+	Trojkat(int=0, int=0, int=0);
 	void kon_tro();
 	void walidacja(int &a);
 };
