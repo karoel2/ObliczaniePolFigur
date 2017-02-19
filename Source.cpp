@@ -3,28 +3,72 @@
 #include "string"
 #include "cmath"
 #include "Header.h"
-const float M_PI = 3.13159;
+const float M_PI = 3.141592;
 using namespace std;
-int Trojkat::obwod() {
+void walidacja(int &t) {
+	do {
+		if (cin >> t) {
+			break;
+		}
+		else {
+			cout << "Podaj liczbe!\n";
+			cin.clear();
+			cin.ignore(numeric_limits<streamsize>::max(), '\n');
+		}
+	} while (1);
+}
+void wiekszaOdZera(int &t) {
+	t = 0;
+	do {
+		walidacja(t);
+		if (t <= 0) cout << "Liczba musi byc wieksza od 0\n";
+	} while (t <= 0);
+}
+bool trapez(int a, int b, int c, int d) {
+	if ((abs(d - c) < abs(b - a)) && (abs(b - a) < (d + c)) || ((d - c) == 0) && ((b - a) == 0)) {
+		return true;
+	}
+	else {
+		return false;
+		cout << "Nie da sie stowrzyc podanego trapezu! Sprobuj jeszcze raz\n";
+	}
+}
+float Trojkat::obwod() {
 		return a + b + c;
 }
-Trojkat::Trojkat(int i, int o, int p) {
-		i = a;
-		p = b;
-		o = c;
+float Prostokat::obwod() {
+	return (a * 2) + (b * 2);
+}
+float Kwadrat::obwod() {
+	return a * 4;
+}
+float Trapez::obwod() {
+	return a + b + c + d;
+}
+float Deltoid::obwod() {
+	return (a * 2) + (b * 2);
+}
+float Romb::obwod() {
+	return a * 4;
+}
+float Okrag::obwod() {
+	return 2*M_PI*a;
+}
+float Rownoleglobok::obwod() {
+	return (a * 2) + (b * 2);
 }
 void Trojkat::kon_tro() {
 	int q, w, e;
 	bool y = false;
 	do {
-		cout << "podaj pierwszy bok trojkata\n";
-		walidacja(q);
-		cout << "podaj drugi bok trojkata\n";
-		walidacja(w);
-		cout << "podaj trzeci bok trojkata\n";
-		walidacja(e);
+		cout << "Podaj boki trojkata\n";
+		wiekszaOdZera(q);
+		wiekszaOdZera(w);
+		wiekszaOdZera(e);
 		if (q + w > e && q + e > w && w + e > q) {
-			Trojkat(q, w, e);
+			a = q;
+			b = w;
+			c = e;
 			y = true;
 		}
 		else {
@@ -32,36 +76,75 @@ void Trojkat::kon_tro() {
 		}
 	} while (y != true);
 }
-void Trojkat::walidacja(int &a) {
+void Trapez::kon_trap() {
+	int q, w, e, r;
+	bool qwe=false;
 	do {
-		if (cin >> a) {
-			break;
+		cout << "podaj podstawy trapezu, a nastepnie jego ramiona\n";
+		wiekszaOdZera(q);
+		wiekszaOdZera(w);
+		wiekszaOdZera(e);
+		wiekszaOdZera(r);
+		if (q > w) {
+			qwe = trapez(q, w, e, r);
+		}
+		else if (w > q) {
+			qwe = trapez(q, w, e, r);
+
+		}
+		else if (w == q&&e == r) {
+			qwe = true;
 		}
 		else {
-			cout << "Podaj liczbe!" << endl;
-			cin.clear();
-			cin.ignore(numeric_limits<streamsize>::max(), '\n');
+			qwe = false;
 		}
-	} while (1);
-}
-int Kwadrat::obwod() {
-	return a * 4;
-}
-Kwadrat::Kwadrat(int q) {
-	q = a;
+		if (qwe == true) {
+			a = q;
+			b = w;
+			c = e;
+			d = e;
+		}
+	} while (qwe != true);
 }
 void Kwadrat::kon_kwa() {
-	cout << "podaj bok kwadratu" << endl;
-	cin >> a;
-}
-int Prostokat::obwod() {
-	return (a * 2) + (b * 2);
-}
-Prostokat::Prostokat(int q, int w) {
-	q = a;
-	w = b;
+	int q;
+	cout << "podaj bok kwadratu\n";
+	wiekszaOdZera(q);
+	a = q;
 }
 void Prostokat::kon_pros() {
-	cout << "podaj boki prostokatu" << endl;
-	cin >> a >> b;
+	int q, w;
+	cout << "podaj boki prostokatu\n";
+	wiekszaOdZera(q);
+	wiekszaOdZera(w);
+	a = q;
+	b = w;
+}
+void Deltoid::kon_delt(){
+	int q, w;
+	cout << "podaj bok deltoidu\n";
+	wiekszaOdZera(q);
+	wiekszaOdZera(w);
+	a = q;
+	b = w;
+}
+void Romb::kon_romb() {
+	int q;
+	cout << "podaj bok rombu\n";
+	wiekszaOdZera(q);
+	a = q;
+}
+void Rownoleglobok::kon_rown() {
+	int q, w;
+	cout << "podaj bok rownolegloboku\n";
+	wiekszaOdZera(q);
+	wiekszaOdZera(w);
+	a = q;
+	b = w;
+}
+void Okrag::kon_ok() {
+	int q;
+	cout << "podaj promien okregu\n";
+	wiekszaOdZera(q);
+	a = q;
 }
