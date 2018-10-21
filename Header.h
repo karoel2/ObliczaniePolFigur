@@ -54,3 +54,4 @@ public:
 	virtual float obwod();
 	void kon_ok();
 };
+//bbbbbb
